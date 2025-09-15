@@ -23,7 +23,7 @@ It processes **sensor data**, detects **snow cover**, and optimizes physical par
 ## Project Structure
 
 ```
-text
+bash
 CryoGrid_Optimization_Automatization/
 ├── src/            # MATLAB scripts
 ├── data/           # Sensor CSV + Excel metadata
@@ -95,7 +95,6 @@ Open _build/html/index.html in your browser.
 ## Author
 
 Fribault Tristan — fribaulttristan@gmail.com
-
 
 
 

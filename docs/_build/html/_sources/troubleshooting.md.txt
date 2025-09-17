@@ -86,7 +86,7 @@ Solution: Reduce the number of workers in MATLAB Parallel Preferences.
 
 ## Issues in the objective function 
 
-You will not have an error message because it's in the parallelisation loop.
+You will not have an error message because it is in the parallelisation loop.
 
 To detect a problem, you have to go to the `CryoGridCommunity_results/CG_single/` folder. 
 - First step, check if there is a .mat result file in your workers folders. If there is not a .mat file 
@@ -95,27 +95,6 @@ after a long time after the beginning of the simulation it's because the CryoGri
 
 - Second step, check if the `temp_results` folder is created with the results files. If it is not the case
 you have a problem with your path to create this folder.
-
-
-## Nanmin error
-
-There is a conflict between a CryoGrid and a Matlab bayesopt function. This function name is : nanmin.
-This error says :
-
-```
-matlab
-Error nanmin
-Too many input arguments
-```
-
-Normally, the program is done to avoid this conflict.Add
-
-Cause : This error can appear if you have several CryoGrid folders in your Matlab path.
-
-Solution : Simply place a single CryoGrid folder in your MatLab path and specify the correct paths to 
-the CryoGrid source and results in your configuration section. The programme removes the path to the 
-CryoGrid source before launching the bayesopt loop and adds it before the CryoGrid execution script. Once
-the CryoGrid simulation is complete, the path to the source is removed again.
 
 
 

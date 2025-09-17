@@ -195,36 +195,36 @@ Feature	Description :
 ```
 
 
-## Temperature profil initialization logic
+## Temperature profile initialization logic
 
-In the `CG_single.xlsx` file, you have to put an initial temperature profil that is the supposed 
+In the `CG_single.xlsx` file, you have to put an initial temperature profile that is the supposed 
 existing temperature column at the near-surface measurement site and that is therefore the inherited 
-ground temperature conditions.. 
+ground temperature conditions. 
 
 ```{figure} _static/initial_temperature_profil.png
 ---
 width: 600px
 align: center
-name: Initial-temp-profil
+name: Initial-temp-profile
 ---
 Visualization of 'CG_single.xlsx' part with the initial temperature profil
 ```
 
-In this optimization logic, it's initialize first at 0°C we then try to assume the inherited temperature
-profil. All layers are initialised at the same temperature for simplicity, and because these are 
-surface sensors, the programme focuses solely on surface temperature. To do so, every time there is a better 
-simulation (a better score), this profil `T_ini` is updated with this logic : 
+In this optimization logic, it is first initialize at 0°C. We then try to assume the inherited temperature
+profile. All layers are initialized at the same temperature for simplicity, and because these are 
+near-surface sensors, the programme focuses solely on near-surface temperature. To do so, every time there is a better 
+simulation (a better score), this profile `T_ini` is updated with this logic : 
 
-- calcultion of `T_mean_ref` : the forcing data mean air temperature at the sensor location between 
+- calculation of `T_mean_ref` : the forcing data mean air temperature at the sensor location between 
 1991, January 1st and 2020, December 31th that is supposed to be representative of the climate 
-condition at the measurment site
-- calcultion of `T_mean_sensor` : the forcing data mean annual air temperature between the first day of 
+condition at the measurement site
+- calculation of `T_mean_sensor` : the forcing data mean annual air temperature between the first day of 
 the measurement time serie and the 365th day of the time serie and that is representative of the 
 climate during the measurement period
-- calcultion of `T_mean_cryo` : the mean annual near-surface temperature simulated with CryoGrid 
+- calculation of `T_mean_cryo` : the mean annual near-surface temperature simulated with CryoGrid 
 between the first and the 365th day of the simulated time serie
 
---> The new initial temperature profil is : `T_ini = T_mean_cryo - abs(T_mean_sensor - T_mean_ref)`
+--> The new initial temperature profile is : `T_ini = T_mean_cryo - abs(T_mean_sensor - T_mean_ref)`
 
 
 ## Score logic

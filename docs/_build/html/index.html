@@ -87,10 +87,10 @@ challenging parameter to calibrate, this workflow is particularly designed to re
 especially snow fraction (i.e. the proportion of deposited snow when a snowfall occurs).</p>
 <p>It automates the entire process of:</p>
 <ul class="simple">
-<li><p>Recover sensor characteristics measured temperature in an Excel file gathering sensors metadata</p></li>
+<li><p>Recovering sensor characteristics measured temperature in an Excel file gathering sensors metadata</p></li>
 <li><p>Updating CryoGrid input files based on sensor characteristics</p></li>
 <li><p>Detecting snow periods from daily temperature measurements</p></li>
-<li><p>Running Bayesian optimization (<code class="docutils literal notranslate"><span class="pre">bayesopt</span></code>) to tune physical parameters</p></li>
+<li><p>Running Bayesian optimization (<code class="docutils literal notranslate"><span class="pre">bayesopt</span></code>) to infer physical parameters</p></li>
 <li><p>Generating statistics and plots for model performance evaluation</p></li>
 </ul>
 <hr class="docutils" />
@@ -101,7 +101,7 @@ especially snow fraction (i.e. the proportion of deposited snow when a snowfall 
 <li><p><strong>Snow Detection Module:</strong> Analyzes daily temperature variations to detect snow cover periods.</p></li>
 <li><p><strong>Optimization method:</strong> Global optimization via Bayesian inference.</p></li>
 <li><p><strong>Modular MATLAB Workflow:</strong> Organized in four stages for clarity and reusability.</p></li>
-<li><p><strong>Scalable to Multiple Sensors:</strong> Adaptability to to different sensor configuration.</p></li>
+<li><p><strong>Scalable to Multiple Sensors:</strong> Adaptability to different sensor configuration.</p></li>
 <li><p><strong>Parallelized code:</strong> Parallelization to reduce optimization time. Workflow with lock mechanisms to prevent conflicts.</p></li>
 </ul>
 </section>
@@ -158,7 +158,7 @@ output folder</p></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#optimization-logic">Optimization Logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#cryogrid-modules-cryogrid">CryoGrid Modules (CryoGrid/)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#data-structure">Data Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#temperature-profil-initialization-logic">Temperature profil initialization logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#temperature-profile-initialization-logic">Temperature profile initialization logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#score-logic">Score logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#extending-the-code">Extending the Code</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#references">References</a></li>
@@ -170,7 +170,6 @@ output folder</p></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#cryogrid-issues">CryoGrid issues</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#optimization-issues">⚡ Optimization Issues</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#issues-in-the-objective-function">Issues in the objective function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#nanmin-error">Nanmin error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="troubleshooting.html#best-practices">✅ Best Practices</a></li>
 </ul>
 </li>

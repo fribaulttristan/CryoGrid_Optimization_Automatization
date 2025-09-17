@@ -19,6 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Troubleshooting &amp; Common Errors" href="troubleshooting.html" />
     <link rel="prev" title="Configuration" href="configuration.html" /> 
 </head>
 
@@ -53,7 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#optimization-logic">Optimization Logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cryogrid-modules-cryogrid">CryoGrid Modules (CryoGrid/)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#data-structure">Data Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#temperature-profil-initialization-logic">Temperature profil initialization logic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#temperature-profile-initialization-logic">Temperature profile initialization logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#score-logic">Score logic</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#extending-the-code">Extending the Code</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#adding-a-new-sensor">Adding a New Sensor</a></li>
@@ -63,6 +64,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting &amp; Common Errors</a></li>
 </ul>
 
         </div>
@@ -335,33 +337,33 @@ helper functions and CryoGrid modules.</p>
 </tbody>
 </table>
 </section>
-<section id="temperature-profil-initialization-logic">
-<h2>Temperature profil initialization logic<a class="headerlink" href="#temperature-profil-initialization-logic" title="Link to this heading"></a></h2>
-<p>In the <code class="docutils literal notranslate"><span class="pre">CG_single.xlsx</span></code> file, you have to put an initial temperature profil that is the supposed
+<section id="temperature-profile-initialization-logic">
+<h2>Temperature profile initialization logic<a class="headerlink" href="#temperature-profile-initialization-logic" title="Link to this heading"></a></h2>
+<p>In the <code class="docutils literal notranslate"><span class="pre">CG_single.xlsx</span></code> file, you have to put an initial temperature profile that is the supposed
 existing temperature column at the near-surface measurement site and that is therefore the inherited
-ground temperature conditions…</p>
-<figure class="align-center" id="initial-temp-profil">
+ground temperature conditions.</p>
+<figure class="align-center" id="initial-temp-profile">
 <a class="reference internal image-reference" href="_images/initial_temperature_profil.png"><img alt="_images/initial_temperature_profil.png" src="_images/initial_temperature_profil.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Visualization of ‘CG_single.xlsx’ part with the initial temperature profil</span><a class="headerlink" href="#initial-temp-profil" title="Link to this image"></a></p>
+<p><span class="caption-text">Visualization of ‘CG_single.xlsx’ part with the initial temperature profil</span><a class="headerlink" href="#initial-temp-profile" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In this optimization logic, it’s initialize first at 0°C we then try to assume the inherited temperature
-profil. All layers are initialised at the same temperature for simplicity, and because these are
-surface sensors, the programme focuses solely on surface temperature. To do so, every time there is a better
-simulation (a better score), this profil <code class="docutils literal notranslate"><span class="pre">T_ini</span></code> is updated with this logic :</p>
+<p>In this optimization logic, it is first initialize at 0°C. We then try to assume the inherited temperature
+profile. All layers are initialized at the same temperature for simplicity, and because these are
+near-surface sensors, the programme focuses solely on near-surface temperature. To do so, every time there is a better
+simulation (a better score), this profile <code class="docutils literal notranslate"><span class="pre">T_ini</span></code> is updated with this logic :</p>
 <ul class="simple">
-<li><p>calcultion of <code class="docutils literal notranslate"><span class="pre">T_mean_ref</span></code> : the forcing data mean air temperature at the sensor location between
+<li><p>calculation of <code class="docutils literal notranslate"><span class="pre">T_mean_ref</span></code> : the forcing data mean air temperature at the sensor location between
 1991, January 1st and 2020, December 31th that is supposed to be representative of the climate
-condition at the measurment site</p></li>
-<li><p>calcultion of <code class="docutils literal notranslate"><span class="pre">T_mean_sensor</span></code> : the forcing data mean annual air temperature between the first day of
+condition at the measurement site</p></li>
+<li><p>calculation of <code class="docutils literal notranslate"><span class="pre">T_mean_sensor</span></code> : the forcing data mean annual air temperature between the first day of
 the measurement time serie and the 365th day of the time serie and that is representative of the
 climate during the measurement period</p></li>
-<li><p>calcultion of <code class="docutils literal notranslate"><span class="pre">T_mean_cryo</span></code> : the mean annual near-surface temperature simulated with CryoGrid
+<li><p>calculation of <code class="docutils literal notranslate"><span class="pre">T_mean_cryo</span></code> : the mean annual near-surface temperature simulated with CryoGrid
 between the first and the 365th day of the simulated time serie</p></li>
 </ul>
-<p>–&gt; The new initial temperature profil is : <code class="docutils literal notranslate"><span class="pre">T_ini</span> <span class="pre">=</span> <span class="pre">T_mean_cryo</span> <span class="pre">-</span> <span class="pre">abs(T_mean_sensor</span> <span class="pre">-</span> <span class="pre">T_mean_ref)</span></code></p>
+<p>–&gt; The new initial temperature profile is : <code class="docutils literal notranslate"><span class="pre">T_ini</span> <span class="pre">=</span> <span class="pre">T_mean_cryo</span> <span class="pre">-</span> <span class="pre">abs(T_mean_sensor</span> <span class="pre">-</span> <span class="pre">T_mean_ref)</span></code></p>
 </section>
 <section id="score-logic">
 <h2>Score logic<a class="headerlink" href="#score-logic" title="Link to this heading"></a></h2>
@@ -425,6 +427,7 @@ a special function.</p></li>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="configuration.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting &amp; Common Errors" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

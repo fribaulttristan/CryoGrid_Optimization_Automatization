@@ -1,6 +1,6 @@
 # Usage
 
-This page explains how to use the **CryoGrid Optimization Automatization** project once it is installed 
+This page explains how to use the **CryoGrid Optimization Automatization** project once it has been installed 
 and set up.
 
 ---
@@ -25,17 +25,17 @@ This ensures that all functions, files and scripts are accessible.
 The main script included in the project is:
 
 - `main_optimization_parallel.m`
-    - Runs the full optimization workflow in parallel for multiple sensors. This is the main script to configure and 
+    - Runs the full optimization workflow in parallel for one sensor at the time. This is the main script to configure and 
 run the optimization workflow. You typically only need to modify this script to set your sensor and paths.
     - This script calls, with run_program_parallel script, other functions for input file generation, snow detection, 
     - Bayesian optimization, and post-processing.
     - Runs the workflow for a single sensor. 
 
 - `functions/ folder`
-    - Contains helper MATLAB functions such as detect_snow_presence.m, run_CG_from_excel.m, score_model_seasonal.m, etc.
+    - Contains MATLAB functions such as detect_snow_presence.m, run_CG_from_excel.m, score_model_seasonal.m, etc.
 
 - `CryoGrid/ folder`
-    - Contains all the CryoGrid model. It's the model which simulate the permafrost temperature in the sensor area.
+    - Contains all the CryoGrid model. It is the model which simulate the permafrost temperature in the sensor area.
 In this folder, you have all the necessary files and scripts to run a CryoGrid simulation.
 
 
@@ -57,7 +57,7 @@ DATE,TEMP
 ...
 ```
 
-- This file should contain the sensor ID, followed by 'daily_mean.csv'. 
+- This filename should contain the sensor ID, followed by 'daily_mean.csv'. 
 
 Exemple :
 `2ALP_S1_daily_mean.csv`
@@ -75,14 +75,14 @@ width: 600px
 align: center
 name: Golbal-excel-file
 ---
-Visualization of global excel sensor metadata part
+Visualization of the excel sensor metadata file
 ```
 
 
-### Sensor forcing File :
+### Sensor forcing file :
 - .mat file located in `forcing/Forcing_Data/`
 - Used by CryoGrid as input forcing for simulations
-- This file should contain the sensor ID, and strat with 'FORCING'.
+- The filename should contain the sensor ID, and strat with 'FORCING' (any other information in the filename are not necessary).
 
 Exemple : 
 `FORCING_data_elev_3540_slope_0_aspect_-1_massif_15_dates_01Aug1958_01Aug2024_2ALP_S1.mat`
@@ -100,15 +100,15 @@ Open the 'main_optimization_parallel.m' MATLAB script.
 ### Configure Sensor and Paths
 Before running the script, set the following variables in MATLAB:
 - the sensor ID you want to study
-- path to the PAPROG_Data_set
-- path to the daily_mean sensor folder
+- path to the PAPROG_Dataset
+- path to the daily_mean temperature sensor folder
 - path to the forcing folder
-- path to the CryoGrid Excel file, called CG_single.xlsx in the .../CryoGridCommunity_results/ folder
+- path to the CryoGrid Excel file, called CG_single.xlsx in the .../CryoGridCommunity_results/CG_single/ folder
 - path to the CryoGridCommunity_results/ and CryoGridCommunity_source/folders
 
 
 ### Set Optimization Parameters
-And after you have to provide the optimisation informations :
+Now you can set the optimisation informations :
 - season_weights
 - number of iterations
 - step time, > **Note:** Step time should not exceed 1. For CryoGrid, the ideal value is 0.25.
@@ -149,9 +149,9 @@ To reduce the simulation runtime, this code is parallelized. The Bayesian loop :
 Default parameters are stored in CryoGridCommunity_results/CG_single/CONSTANTS_excel.xlsx .
 
 Parameters you want to adjust :
-- albedo
-- z0 (roughness length)
-- snow_fraction
+- albedo [dimensionless]
+- z0 (roughness length) [m]
+- snow_fraction [dimensionless]
 
 Additional configuration options can be added in the future, like a new optimized variable.
 

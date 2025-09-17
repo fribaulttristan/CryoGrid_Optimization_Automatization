@@ -65,7 +65,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#issues-in-the-objective-function">Issues in the objective function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#nanmin-error">Nanmin error</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#best-practices">✅ Best Practices</a></li>
 </ul>
 </li>
@@ -178,7 +177,7 @@ Check your CryoGrid configuration and CryoGrid documentation.</p>
 </section>
 <section id="issues-in-the-objective-function">
 <h2>Issues in the objective function<a class="headerlink" href="#issues-in-the-objective-function" title="Link to this heading"></a></h2>
-<p>You will not have an error message because it’s in the parallelisation loop.</p>
+<p>You will not have an error message because it is in the parallelisation loop.</p>
 <p>To detect a problem, you have to go to the <code class="docutils literal notranslate"><span class="pre">CryoGridCommunity_results/CG_single/</span></code> folder.</p>
 <ul class="simple">
 <li><p>First step, check if there is a .mat result file in your workers folders. If there is not a .mat file
@@ -187,22 +186,6 @@ after a long time after the beginning of the simulation it’s because the CryoG
 <li><p>Second step, check if the <code class="docutils literal notranslate"><span class="pre">temp_results</span></code> folder is created with the results files. If it is not the case
 you have a problem with your path to create this folder.</p></li>
 </ul>
-</section>
-<section id="nanmin-error">
-<h2>Nanmin error<a class="headerlink" href="#nanmin-error" title="Link to this heading"></a></h2>
-<p>There is a conflict between a CryoGrid and a Matlab bayesopt function. This function name is : nanmin.
-This error says :</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">matlab</span>
-<span class="n">Error</span> <span class="n">nanmin</span>
-<span class="n">Too</span> <span class="n">many</span> <span class="nb">input</span> <span class="n">arguments</span>
-</pre></div>
-</div>
-<p>Normally, the program is done to avoid this conflict.Add</p>
-<p>Cause : This error can appear if you have several CryoGrid folders in your Matlab path.</p>
-<p>Solution : Simply place a single CryoGrid folder in your MatLab path and specify the correct paths to
-the CryoGrid source and results in your configuration section. The programme removes the path to the
-CryoGrid source before launching the bayesopt loop and adds it before the CryoGrid execution script. Once
-the CryoGrid simulation is complete, the path to the source is removed again.</p>
 </section>
 <section id="best-practices">
 <h2>✅ Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>

@@ -15,10 +15,10 @@ challenging parameter to calibrate, this workflow is particularly designed to re
 especially snow fraction (i.e. the proportion of deposited snow when a snowfall occurs).
 
 It automates the entire process of:
-- Recover sensor characteristics measured temperature in an Excel file gathering sensors metadata
+- Recovering sensor characteristics measured temperature in an Excel file gathering sensors metadata
 - Updating CryoGrid input files based on sensor characteristics
 - Detecting snow periods from daily temperature measurements
-- Running Bayesian optimization (`bayesopt`) to tune physical parameters
+- Running Bayesian optimization (`bayesopt`) to infer physical parameters
 - Generating statistics and plots for model performance evaluation
 
 
@@ -30,7 +30,7 @@ It automates the entire process of:
 - **Snow Detection Module:** Analyzes daily temperature variations to detect snow cover periods.  
 - **Optimization method:** Global optimization via Bayesian inference.  
 - **Modular MATLAB Workflow:** Organized in four stages for clarity and reusability.  
-- **Scalable to Multiple Sensors:** Adaptability to to different sensor configuration.
+- **Scalable to Multiple Sensors:** Adaptability to different sensor configuration.
 - **Parallelized code:** Parallelization to reduce optimization time. Workflow with lock mechanisms to prevent conflicts.  
 
 ---

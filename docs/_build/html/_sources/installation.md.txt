@@ -31,8 +31,8 @@ After cloning, the project folder should look like this:
 
 ```
 CryoGrid_Optimization_Automatization/
-├── src/                                    # MATLAB scripts : choose between Mac and Windows script version
-│   ├── functions/                              # MatLab Optimization functions 
+├── src/                                    # MATLAB scripts 
+│   ├── functions/                              # MatLab Optimization functions
 │   ├── main_optimization_parallel/             # Main Matlab script, unique code to open                
 ├── CryoGrid/                               # CryoGrid MATLAB 
 │   ├── CryoGridCommunity_results/              # Files and Results of CryoGrid and Optimization outputs
@@ -40,7 +40,7 @@ CryoGrid_Optimization_Automatization/
 │   └── ...
 ├── data/                                   # Sensors data folder
 │   ├── Daily_mean/                             # Exemple of sensor CSV files format
-│   ├── PAPROG_Data_set.xlsx                    # Exemple of Excel sensor format 
+│   ├── Sensors_metedata.xlsx                   # Exemple of Excel sensor format 
 ├── forcing/                                # Forcing folder
 │   ├── Forcing_Data/                           # Exemple of sensor .mat forcing files
 │   ├── Forcing_code/                           # Code to create Matlab forcing file
@@ -50,9 +50,9 @@ CryoGrid_Optimization_Automatization/
 
 ## Data Preparation
 
-- The `data/Daily_mean/` folder contains example sensor CSV files.  
-- For your own simulations, place your sensor CSV files in `data/Daily_mean/`.  
-- `.mat` forcing files should be placed in `forcing/Forcing_Data/`.  
+- The `data/Daily_mean/` folder contains example sensor CSV files. Make sure to follow the formatting of the template file.
+- For your own simulations, place your sensor CSV files in `data/Daily_mean/`. 
+- `.mat` forcing files should be placed in `forcing/Forcing_Data/`. Make sure to follow the formatting of the template file.
 - Ensure that file names match the sensor ID used in your MATLAB scripts and in the `PAPROG_Data_set.xlsx` file.
 
 
@@ -63,10 +63,10 @@ the MATLAB path in MATLAB:
 
 ```
 Exemple : matlab
-addpath('path_to_project/src')
-addpath('path_to_project/CryoGrid')
-addpath('path_to_project/data')
-addpath('path_to_project/forcing')
+addpath(genpath('path_to_project/src'))
+addpath(genpath('path_to_project/CryoGrid'))
+addpath(genpath('path_to_project/data'))
+addpath(genpath('path_to_project/forcing'))
 ```
 
 

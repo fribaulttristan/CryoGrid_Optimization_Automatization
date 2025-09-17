@@ -112,8 +112,8 @@ computer.</p>
 cd CryoGrid_Optimization_Automatization</p>
 <p>After cloning, the project folder should look like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>CryoGrid_Optimization_Automatization/
-├── src/                                    # MATLAB scripts : choose between Mac and Windows script version
-│   ├── functions/                              # MatLab Optimization functions 
+├── src/                                    # MATLAB scripts 
+│   ├── functions/                              # MatLab Optimization functions
 │   ├── main_optimization_parallel/             # Main Matlab script, unique code to open                
 ├── CryoGrid/                               # CryoGrid MATLAB 
 │   ├── CryoGridCommunity_results/              # Files and Results of CryoGrid and Optimization outputs
@@ -121,7 +121,7 @@ cd CryoGrid_Optimization_Automatization</p>
 │   └── ...
 ├── data/                                   # Sensors data folder
 │   ├── Daily_mean/                             # Exemple of sensor CSV files format
-│   ├── PAPROG_Data_set.xlsx                    # Exemple of Excel sensor format 
+│   ├── Sensors_metedata.xlsx                   # Exemple of Excel sensor format 
 ├── forcing/                                # Forcing folder
 │   ├── Forcing_Data/                           # Exemple of sensor .mat forcing files
 │   ├── Forcing_code/                           # Code to create Matlab forcing file
@@ -132,9 +132,9 @@ cd CryoGrid_Optimization_Automatization</p>
 <section id="data-preparation">
 <h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The <code class="docutils literal notranslate"><span class="pre">data/Daily_mean/</span></code> folder contains example sensor CSV files.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">data/Daily_mean/</span></code> folder contains example sensor CSV files. Make sure to follow the formatting of the template file.</p></li>
 <li><p>For your own simulations, place your sensor CSV files in <code class="docutils literal notranslate"><span class="pre">data/Daily_mean/</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.mat</span></code> forcing files should be placed in <code class="docutils literal notranslate"><span class="pre">forcing/Forcing_Data/</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.mat</span></code> forcing files should be placed in <code class="docutils literal notranslate"><span class="pre">forcing/Forcing_Data/</span></code>. Make sure to follow the formatting of the template file.</p></li>
 <li><p>Ensure that file names match the sensor ID used in your MATLAB scripts and in the <code class="docutils literal notranslate"><span class="pre">PAPROG_Data_set.xlsx</span></code> file.</p></li>
 </ul>
 </section>
@@ -143,10 +143,10 @@ cd CryoGrid_Optimization_Automatization</p>
 <p>Before running any scripts, add the <code class="docutils literal notranslate"><span class="pre">src/</span></code>, <code class="docutils literal notranslate"><span class="pre">CryoGrid/</span></code>, <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">forcing/</span></code> folders and subfolders to
 the MATLAB path in MATLAB:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Exemple</span> <span class="p">:</span> <span class="n">matlab</span>
-<span class="n">addpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/src&#39;</span><span class="p">)</span>
-<span class="n">addpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/CryoGrid&#39;</span><span class="p">)</span>
-<span class="n">addpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/data&#39;</span><span class="p">)</span>
-<span class="n">addpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/forcing&#39;</span><span class="p">)</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">genpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/src&#39;</span><span class="p">))</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">genpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/CryoGrid&#39;</span><span class="p">))</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">genpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/data&#39;</span><span class="p">))</span>
+<span class="n">addpath</span><span class="p">(</span><span class="n">genpath</span><span class="p">(</span><span class="s1">&#39;path_to_project/forcing&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>

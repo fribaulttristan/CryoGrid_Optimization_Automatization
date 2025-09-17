@@ -51,7 +51,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#input-data">Input Data</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#sensor-csv-files">Sensor CSV Files :</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sensor-excel-file">Sensor Excel File :</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sensor-forcing-file">Sensor forcing File :</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sensor-forcing-file">Sensor forcing file :</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#running-the-optimization">Running the Optimization</a><ul>
@@ -72,6 +72,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting &amp; Common Errors</a></li>
 </ul>
 
         </div>
@@ -100,7 +101,7 @@
              
   <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
-<p>This page explains how to use the <strong>CryoGrid Optimization Automatization</strong> project once it is installed
+<p>This page explains how to use the <strong>CryoGrid Optimization Automatization</strong> project once it has been installed
 and set up.</p>
 <hr class="docutils" />
 <section id="add-matlab-path">
@@ -120,7 +121,7 @@ are added to the MATLAB path:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">main_optimization_parallel.m</span></code></p>
 <ul>
-<li><p>Runs the full optimization workflow in parallel for multiple sensors. This is the main script to configure and
+<li><p>Runs the full optimization workflow in parallel for one sensor at the time. This is the main script to configure and
 run the optimization workflow. You typically only need to modify this script to set your sensor and paths.</p></li>
 <li><p>This script calls, with run_program_parallel script, other functions for input file generation, snow detection,</p></li>
 <li><p>Bayesian optimization, and post-processing.</p></li>
@@ -129,12 +130,12 @@ run the optimization workflow. You typically only need to modify this script to 
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">functions/</span> <span class="pre">folder</span></code></p>
 <ul>
-<li><p>Contains helper MATLAB functions such as detect_snow_presence.m, run_CG_from_excel.m, score_model_seasonal.m, etc.</p></li>
+<li><p>Contains MATLAB functions such as detect_snow_presence.m, run_CG_from_excel.m, score_model_seasonal.m, etc.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CryoGrid/</span> <span class="pre">folder</span></code></p>
 <ul>
-<li><p>Contains all the CryoGrid model. It’s the model which simulate the permafrost temperature in the sensor area.
+<li><p>Contains all the CryoGrid model. It is the model which simulate the permafrost temperature in the sensor area.
 In this folder, you have all the necessary files and scripts to run a CryoGrid simulation.</p></li>
 </ul>
 </li>
@@ -158,7 +159,7 @@ In this folder, you have all the necessary files and scripts to run a CryoGrid s
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>This file should contain the sensor ID, followed by ‘daily_mean.csv’.</p></li>
+<li><p>This filename should contain the sensor ID, followed by ‘daily_mean.csv’.</p></li>
 </ul>
 <p>Exemple :
 <code class="docutils literal notranslate"><span class="pre">2ALP_S1_daily_mean.csv</span></code></p>
@@ -175,16 +176,16 @@ the function folder</p></li>
 <a class="reference internal image-reference" href="_images/global_excel_file.png"><img alt="_images/global_excel_file.png" src="_images/global_excel_file.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Visualization of global excel sensor metadata part</span><a class="headerlink" href="#golbal-excel-file" title="Link to this image"></a></p>
+<p><span class="caption-text">Visualization of the excel sensor metadata file</span><a class="headerlink" href="#golbal-excel-file" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 <section id="sensor-forcing-file">
-<h3>Sensor forcing File :<a class="headerlink" href="#sensor-forcing-file" title="Link to this heading"></a></h3>
+<h3>Sensor forcing file :<a class="headerlink" href="#sensor-forcing-file" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>.mat file located in <code class="docutils literal notranslate"><span class="pre">forcing/Forcing_Data/</span></code></p></li>
 <li><p>Used by CryoGrid as input forcing for simulations</p></li>
-<li><p>This file should contain the sensor ID, and strat with ‘FORCING’.</p></li>
+<li><p>The filename should contain the sensor ID, and strat with ‘FORCING’ (any other information in the filename are not necessary).</p></li>
 </ul>
 <p>Exemple :
 <code class="docutils literal notranslate"><span class="pre">FORCING_data_elev_3540_slope_0_aspect_-1_massif_15_dates_01Aug1958_01Aug2024_2ALP_S1.mat</span></code></p>
@@ -202,16 +203,16 @@ the function folder</p></li>
 <p>Before running the script, set the following variables in MATLAB:</p>
 <ul class="simple">
 <li><p>the sensor ID you want to study</p></li>
-<li><p>path to the PAPROG_Data_set</p></li>
-<li><p>path to the daily_mean sensor folder</p></li>
+<li><p>path to the PAPROG_Dataset</p></li>
+<li><p>path to the daily_mean temperature sensor folder</p></li>
 <li><p>path to the forcing folder</p></li>
-<li><p>path to the CryoGrid Excel file, called CG_single.xlsx in the …/CryoGridCommunity_results/ folder</p></li>
+<li><p>path to the CryoGrid Excel file, called CG_single.xlsx in the …/CryoGridCommunity_results/CG_single/ folder</p></li>
 <li><p>path to the CryoGridCommunity_results/ and CryoGridCommunity_source/folders</p></li>
 </ul>
 </section>
 <section id="set-optimization-parameters">
 <h3>Set Optimization Parameters<a class="headerlink" href="#set-optimization-parameters" title="Link to this heading"></a></h3>
-<p>And after you have to provide the optimisation informations :</p>
+<p>Now you can set the optimisation informations :</p>
 <ul class="simple">
 <li><p>season_weights</p></li>
 <li><p>number of iterations</p></li>
@@ -253,9 +254,9 @@ the function folder</p></li>
 <p>Default parameters are stored in CryoGridCommunity_results/CG_single/CONSTANTS_excel.xlsx .</p>
 <p>Parameters you want to adjust :</p>
 <ul class="simple">
-<li><p>albedo</p></li>
-<li><p>z0 (roughness length)</p></li>
-<li><p>snow_fraction</p></li>
+<li><p>albedo [dimensionless]</p></li>
+<li><p>z0 (roughness length) [m]</p></li>
+<li><p>snow_fraction [dimensionless]</p></li>
 </ul>
 <p>Additional configuration options can be added in the future, like a new optimized variable.</p>
 </section>

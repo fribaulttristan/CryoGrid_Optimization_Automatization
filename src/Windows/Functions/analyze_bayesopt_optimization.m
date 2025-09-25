@@ -88,7 +88,7 @@ function [best_params, best_score] = analyze_bayesopt_optimization(results)
         zlabel('Score');
         title(['Performance Surface: ', param_names{1}, ' vs ', param_names{2}]);
         shading interp;
-        colormap(flipud(jet));
+        colormap(jet);
         c = colorbar;
         ylabel(c, 'Score');
         grid on;
@@ -130,7 +130,7 @@ function [best_params, best_score] = analyze_bayesopt_optimization(results)
         % Real points
         hold on;
         scatter3(x, y, z, 50, scores, 'filled', 'MarkerEdgeColor','k');
-        colormap(flipud(jet));
+        colormap(jet);
         c = colorbar;
         ylabel(c, 'Scores');
 

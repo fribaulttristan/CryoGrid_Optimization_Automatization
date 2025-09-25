@@ -14,40 +14,40 @@ clc; clear; close all;
 % Sensor ID
 % ⚠️ The sensor ID must be present in the Excel file with all sensor data,
 % and all related information must be filled in the corresponding columns.
-sensor_ID = 'GD_CAP_W_snow';                     % Name of the sensor to process
+sensor_ID = 'MON1';                     % Name of the sensor to process
 
 % --- File containing all sensor information ---
 
 % Path to the Excel file listing all sensors and their information.
 % Must keep the exact column naming format.
-sensors_file = '/Users/tristanfribault/Documents/Stage_Edytem_aout/PAPROG_Dataset_final.xlsx';
+sensors_file = '/Users/maximefadel/Documents/Stage_Edytem/CryoGrid_Optimization_Automatization/data/PAPROG_Dataset_final_exemple.xlsx';
 
 % --- Folder with reference sensor data ---
 
 % Path to the folder containing all .csv or .xlsx files with reference
 % sensor data from the Excel table. These files have been formatted in a
 % standardized way.
-daily_mean_sensors_folder = "/Users/tristanfribault/Documents/Stage_Edytem_aout/Moyennes Journalières";
+daily_mean_sensors_folder = "/Users/maximefadel/Documents/Stage_Edytem/CryoGrid_Optimization_Automatization/data/Daily_mean";
 
 % --- Folder with sensor forcing data ---
 
 % Path to the folder containing forcing data.
-forcing_folder = '/Users/tristanfribault/Documents/Stage_Edytem/Tristan_Forcage/Donnes_Forcage';
+forcing_folder = '/Users/maximefadel/Documents/Stage_Edytem/CryoGrid_Optimization_Automatization/forcing/Forcing_Data';
 
 % --- CryoGrid parameterization Excel file ---
 
 % Path to the Excel file CG_single.xlsx 
-cryogrid_excel_file = '/Users/tristanfribault/Documents/Stage_Edytem/Cryogrid_Tristan/Cryogrid_to_run/CryoGridCommunity_results/CG_single/CG_single.xlsx';
+cryogrid_excel_file = '/Users/maximefadel/Documents/Stage_Edytem/CryoGrid_Optimization_Automatization/CryoGrid/CryoGridCommunity_results/CG_single/CG_single.xlsx';
 
 % --- Path to the CryoGrid source folder ---
 
 % Path to the CryoGrid source folder to be added in order to run the model
 % without Nanmin conflicts.
-cryogrid_source_path = '/Users/tristanfribault/Documents/Stage_Edytem/Cryogrid_Tristan/Cryogrid_to_run/CryoGridCommunity_source';
+cryogrid_source_path = '/Users/maximefadel/Documents/Stage_Edytem/CryoGrid_Optimization_Automatization/CryoGrid/CryoGridCommunity_source';
 
 % --- Path to the CryoGrid results folder ---
 
-cryogrid_results_path = '/Users/tristanfribault/Documents/Stage_Edytem/Cryogrid_Tristan/Cryogrid_to_run/CryoGridCommunity_results/';
+cryogrid_results_path = '/Users/maximefadel/Documents/Stage_Edytem/CryoGrid_Optimization_Automatization/CryoGrid/CryoGridCommunity_results/';
 
 % --- Seasonal weights for refining model scoring ---
 

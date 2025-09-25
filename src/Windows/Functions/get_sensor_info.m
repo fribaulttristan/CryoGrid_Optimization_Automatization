@@ -1,52 +1,46 @@
 function [final_name, sensor_info] = get_sensor_info(sensor_name, file, forcing_folder, dt)
-%GET_SENSOR_INFO
-%   Retrieves sensor information from an Excel file.
+% get_sensor_info : Retrieves sensor information from an Excel file.
 %
-% INPUTS:
-%   - sensor_name : name of the sensor to look for in the "sensor name" column
-%   - file        : path to the Excel file
-%   - forcing_folder : folder containing forcing files
+% INPUT :
+%   - sensor_name : ID to search in the "ID" column (string or numeric)
 %
-% OUTPUTS:
-%   - final_name  : actual sensor name found (from 'sensor name' or 'ID')
-%   - sensor_info : structure containing sensor info (coordinates, slope, depth, etc.)
+% OUTPUT :
+%   - final_name  : actual name found (from 'ID')
+%   - sensor_info : structure containing sensor info (coordinates, slope, depth...)
 
-    % Read full table
+    % Read the full table
     T = readtable(file, 'VariableNamingRule', 'preserve');
 
-    % Required columns
-    required_columns = ["ID", "sensor name", "x", "y", "altitude (m)", ...
+    % Check required columns
+    required_columns = ["ID", "x", "y", "altitude (m)", ...
         "orientation (°)", "snow", "slope", "Depth (m)", ...
-        "first measurement date", "last measurement date", "Mean Albedo", "Standard Deviation"];
+        "first measurement date", "last measurement date", ...
+        "Mean Albedo", "Standard Deviation"];
 
     if ~all(ismember(required_columns, string(T.Properties.VariableNames)))
-        error('The Excel file does not contain all required columns.');
+        error('❌ The Excel file does not contain all required columns.');
     end
 
-    % Search in "sensor name"
-    sensor_names_str = string(cellfun(@(c) strtrim(c), T.("sensor name"), 'UniformOutput', false));
-    idx = find(strcmpi(sensor_names_str, string(sensor_name)));
-
-    % If not found or missing/'?' cell, search in ID
-    if isempty(idx) || any(ismissing(T.("sensor name")(idx))) || any(strcmp(strtrim(string(T.("sensor name")(idx))), '?'))
-        idx = find(strcmpi(strtrim(string(T.ID)), sensor_name));
+    % Robust ID matching (works for numeric or string IDs)
+    colID = T.ID;
+    if isnumeric(colID)
+        sensor_id_num = str2double(sensor_name);
+        idx = find(colID == sensor_id_num, 1);
+    else
+        idx = find(strcmpi(strtrim(string(colID)), string(sensor_name)), 1);
     end
 
     if isempty(idx)
-        error('❌ Sensor "%s" not found in "sensor name" or "ID" columns.', sensor_name);
+        error('❌ Sensor "%s" not found in "ID" column.', sensor_name);
     end
 
-    % Use the first match
+    % Use the first matching row
     row = idx(1);
 
-    % Determine the actual name
-    if ismissing(T.("sensor name")(row)) || contains(T.("sensor name"){row}, '?')
-        final_name = string(T.ID(row));
-    else
-        final_name = string(T.("sensor name"){row});
-    end
+    % Actual name used → fallback to ID
+    final_name = string(T.ID(row));
 
-    % Store values in structure
+    % Extract values into a structure
     sensor_info.longitude    = T.x(row);
     sensor_info.latitude     = T.y(row);
     sensor_info.altitude     = T.("altitude (m)")(row);
@@ -55,34 +49,34 @@ function [final_name, sensor_info] = get_sensor_info(sensor_name, file, forcing_
     sensor_info.sensor_depth = T.("Depth (m)")(row);
     sensor_info.start_time   = T.("first measurement date")(row);
     sensor_info.end_time     = T.("last measurement date")(row);
-    sensor_info.Mean_Albedo = T.("Mean Albedo")(row);
+    sensor_info.Mean_Albedo  = T.("Mean Albedo")(row);
     sensor_info.Standard_Deviation = T.("Standard Deviation")(row);
 
-
-    % Additional elevations
+    % Add additional elevations
     sensor_info.upper_elevation = sensor_info.altitude + 2;
     sensor_info.lower_elevation = sensor_info.altitude - 5;
 
-    % Sky view factor
-    sensor_info.skyview_factor = (180 - (10 + sensor_info.slope_angle)) / 180;
+    % Add sky view factor
+    sensor_info.skyview_factor = 0.5 * (1 + cosd(sensor_info.slope_angle));
 
-    % Save interval in years
+    % Add recording interval (years)
     sensor_info.save_interval = (year(sensor_info.end_time) - year(sensor_info.start_time)) + 1;
 
-    % Add forcing file
-    forcing_file_found = find_forcing_file(forcing_folder, sensor_name);
+    % Add forcing data file
+    forcing_file_found = find_forcing_file(forcing_folder, final_name);
     sensor_info.filename = forcing_file_found;
 
-    % ✅ Truncate end date if exceeding SAFRAN data
+    % Truncate end date if it exceeds SAFRAN data
     max_safran_date = get_last_forcing_date(forcing_file_found);
     if sensor_info.end_time > max_safran_date
-        warning("⚠️ Sensor '%s' end date truncated to %s (beyond SAFRAN data).", sensor_name, max_safran_date);
+        warning("⚠️ Sensor '%s' end date truncated to %s (exceeds SAFRAN data).", ...
+            final_name, max_safran_date);
         sensor_info.end_time = max_safran_date;
     end
 
     % Add step time
     sensor_info.output_timestep = dt;
-    
+
     % Add forcing path
-    sensor_info.forcing_path = char(fullfile(forcing_folder, filesep));
+    sensor_info.forcing_path = fullfile(forcing_folder, '/');
 end
